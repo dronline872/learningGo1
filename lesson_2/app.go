@@ -5,7 +5,6 @@ import (
 	"math"
 )
 
-const pi = math.Pi
 const minNumber = 100
 const maxNumber = 999
 
@@ -31,8 +30,8 @@ func areaTringle() {
 		s := math.Sqrt(p * (p - a) * (p - b) * (p - c))
 		fmt.Printf("Площадь треугольника: %f\n", s)
 	} else {
-		fmt.Println("Неправильные значения сторон треугольника, введите корректные!")
-		areaTringle()
+		err := fmt.Errorf("неправильные значения сторон треугольника: %f, %f, %f", a, b, c)
+		fmt.Println(err)
 	}
 }
 
@@ -51,12 +50,12 @@ func diameterAndLenghtCircle() {
 }
 
 func diameter(lenght float64) float64 {
-	d := lenght / pi
+	d := lenght / math.Pi
 	return d
 }
 
 func lengthCirce(s float64) float64 {
-	p := math.Sqrt(s * 4 * pi)
+	p := math.Sqrt(s * 4 * math.Pi)
 	return p
 }
 
