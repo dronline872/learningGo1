@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"math"
-	"math/big"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -32,7 +32,7 @@ func calculator() {
 	fmt.Print("Введите арифметическую операцию (+, -, *, /, ^, Min, Max): ")
 	fmt.Scanln(&op)
 
-	switch op {
+	switch strings.ToLower(op) {
 	case "+":
 		res = a + b
 	case "-":
@@ -43,9 +43,9 @@ func calculator() {
 		res = a / b
 	case "^":
 		res = math.Pow(a, b)
-	case "Min":
+	case "min":
 		res = math.Min(a, b)
-	case "Max":
+	case "max":
 		res = math.Max(a, b)
 	default:
 		fmt.Printf("Операция выбрана неверно")
@@ -64,8 +64,15 @@ func probablyPrime() {
 		os.Exit(1)
 	}
 
-	for i := 0; i <= a; i++ {
-		if big.NewInt(int64(i)).ProbablyPrime(0) {
+	for i := 2; i <= a; i++ {
+		probablyPrime := true
+		for k := 2; k < i; k++ {
+			if (i % k) == 0 {
+				probablyPrime = false
+			}
+		}
+
+		if probablyPrime {
 			fmt.Println(i, "- простое число")
 		}
 	}
